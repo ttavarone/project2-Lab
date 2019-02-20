@@ -1,6 +1,18 @@
 <?php
   
+$website_name = 'Tucker Tavarone, Resume';
+$author = 'Tucker Tavarone';
+
+$pages = array ('index.php' => 'Home',
+                'resume.php' => 'Resume',
+                'courses.php' => 'Courses',
+                'projects.php' => 'Projects');
+
   function make_page($page_name, $page_content = null, $style = null) {
+    
+    global $pages;
+    global $author;
+    
     echo '
       <!DOCTYPE html>
       <html lang="en">
@@ -36,6 +48,36 @@
 
       <!--  main content container   -->	
       <main class="container">
-    '
+      
+      </main><!-- /main container -->
+	
+	
+	 <!-- website footer   -->
+	<footer>
+      &copy; 2019 Tucker Tavarone
+      <nav class="nav">
+      </nav>
+	</footer>
+
+	
+	<!-- javascript -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>'
   }
+
+function make_navbar($page_name) {
+  global $pages;
+  
+  $menu_item = '';
+  
+  foreach ($pages as $link => $name) {
+    $menu_item .= '<a class="nav-link active" href="'.$link.'" style="color: #05386b">'.$name.'</a>';
+  }
+  
+  return 
+}
 ?>

@@ -10,6 +10,6 @@
 */
 include('functions.php');	
 
-make_page('Sample Page 2', 'sidemenu.html', 'page2.html', 'relatedlinks.html');
+make_page('Sample Page 2', 'sidemenu.html', 'page2.html', 'relatedlinks.html', '<style>a {color: pink;}</style>');
 
 ?>

@@ -14,8 +14,29 @@
  8. Footer.html and navbar.html sections
  9. The side_menu, page_content, aside_content sections
 */
-function make_page($page_name, $side_menu, $page_content, $aside_content) {
+function make_page($page_name, $side_menu, $page_content, $aside_content, $style = null) {
 	
+  $main_content = '
+  <article>
+    '.file_get_contents($page_content).'
+  </article>';
+  
+  if ($side_menu != null && $aside_content != null) {
+    $main_content = '
+      <div class="row">
+        <nav class="col-sm-3 col-lg-3">
+          '.file_get_contents($side_menu).'
+        </nav>
+        
+        <article class="col-sm-9 col-lg-6">
+          '.file_get_contents($page_content).'
+        </article>
+        
+        <aside class="col-sm-12 col-lg-3">
+          '.file_get_contents($aside_content).'
+        </aside>
+      </div>';
+  }
 	echo '
 		<!DOCTYPE html>
 		<html lang="en">
@@ -24,34 +45,34 @@ function make_page($page_name, $side_menu, $page_content, $aside_content) {
 		<title>CSIS-390 - '.$page_name.'</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/custom.css">
+        '.$style.'
 		<body>
+        <header class="col-12">
+		    '.file_get_contents('navbar.html').'
+        </header>
 			<main class="container">
-		
+                '.$main_content.'
 				<div class="row">
-		
-					<header class="col-12">
-						'.file_get_contents('navbar.html').'
-					</header>
 							
-					<nav class="col-sm-3 col-lg-3">
+					<nav class="col-sm-12 col-lg-3">
 						'.file_get_contents($side_menu).'
 					</nav>
 					
-					<article class="col-sm-9 col-lg-6">
+					<article class="col-sm-8 col-lg-6">
 						'.file_get_contents($page_content).'
 					</article>
 					
-					<aside class="col-sm-12 col-lg-3">
+					<aside class="col-sm-4 col-lg-3">
 						'.file_get_contents($aside_content).'
-					</aside>
-					
-					<footer class="col-12">
-						'.file_get_contents('footer.html').'
-					</footer>		
+					</aside>		
 				
 				</div>		
 			
 			</main>
+            
+            <footer class="col-12">
+				'.file_get_contents('footer.html').'
+		    </footer>
 			
 			<!-- javascript -->
 			<script src="js/jquery.min.js"></script>
